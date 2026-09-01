@@ -1,0 +1,349 @@
+{
+  "legacy_ats_score": 81.77,
+  "ml_score": 62.8,
+  "final_hybrid_score": 67.54,
+  "ats_score": 64.66,
+  "ranking_score": 54.93,
+  "resume_quality_score": 61.13,
+  "job_match_score": 67.54,
+  "combined_score": 64.66,
+  "model_ranking_score": 54.93,
+  "score_summary": {
+    "score_version": "v3_split_quality_match",
+    "resume_quality_score": 61.13,
+    "job_match_score": 67.54,
+    "combined_score": 64.66,
+    "ranking_score": 54.93,
+    "legacy_ats_score": 81.77,
+    "ml_score": 62.8,
+    "model_ranking_score": 54.93
+  },
+  "match_label": "strong_match",
+  "model_name": "Random Forest",
+  "parser_mode": "local_fallback",
+  "parser_sources": {},
+  "class_probabilities": {
+    "poor_match": 0.006181,
+    "moderate_match": 0.36584,
+    "strong_match": 0.627979
+  },
+  "matched_required_skills": [
+    "fastapi",
+    "microservices",
+    "python",
+    "rest api",
+    "sql"
+  ],
+  "missing_required_skills": [],
+  "matched_preferred_skills": [
+    "rest api",
+    "microservices",
+    "git",
+    "linux"
+  ],
+  "missing_preferred_skills": [],
+  "matched_keywords": [
+    "fastapi",
+    "microservices",
+    "python",
+    "rest api",
+    "sql",
+    "git",
+    "linux",
+    "backend",
+    "developer",
+    "for",
+    "with",
+    "year",
+    "of",
+    "experience",
+    "skill",
+    "docker",
+    "aw"
+  ],
+  "missing_keywords": [
+    "we",
+    "are",
+    "looking",
+    "3+",
+    "required",
+    "preferred"
+  ],
+  "breakdown": {
+    "skills": {
+      "score": 100.0,
+      "summary": "Required and preferred skill coverage derived from parsed fields plus resume text evidence.",
+      "evidence": [
+        "fastapi",
+        "microservices",
+        "python",
+        "rest api",
+        "sql"
+      ],
+      "raw_value": 1.0
+    },
+    "experience": {
+      "score": 100.0,
+      "summary": "Experience alignment derived from parsed experience fields and heuristic year extraction.",
+      "evidence": [
+        "Resume years detected: 4",
+        "Minimum required years: 3"
+      ],
+      "raw_value": 1.0
+    },
+    "education": {
+      "score": 100.0,
+      "summary": "Education alignment derived from parsed education fields and job qualifications.",
+      "evidence": [
+        "Resume education rank: 4",
+        "Job education rank: 3"
+      ],
+      "raw_value": 1.0
+    },
+    "keywords": {
+      "score": 37.71,
+      "summary": "Keyword overlap between resume, job title, and job description.",
+      "evidence": [
+        "fastapi",
+        "microservices",
+        "python",
+        "rest api",
+        "sql",
+        "git",
+        "linux",
+        "backend",
+        "developer",
+        "for"
+      ],
+      "raw_value": 0.11016949152542373
+    },
+    "semantic": {
+      "score": 56.71,
+      "summary": "Hybrid semantic similarity using embedding-style and TF-IDF similarity.",
+      "evidence": [
+        "Embedding similarity: 0.697",
+        "TF-IDF similarity: 0.408"
+      ],
+      "raw_value": 0.5670864433050156
+    },
+    "projects": {
+      "score": 8.26,
+      "summary": "Project and certification relevance against the role description.",
+      "evidence": [
+        "Project relevance: 0.110",
+        "Certification relevance: 0.000"
+      ],
+      "raw_value": 0.08262675
+    },
+    "quality_contact": {
+      "score": 65.0,
+      "summary": "Availability of core contact information and professional links.",
+      "evidence": [
+        "Email present: True",
+        "Phone present: False",
+        "LinkedIn present: True",
+        "Portfolio/GitHub present: True"
+      ],
+      "raw_value": 0.65
+    },
+    "quality_sections": {
+      "score": 10.0,
+      "summary": "Presence of ATS-friendly core resume sections.",
+      "evidence": [
+        "Skills section detected: False",
+        "Experience section detected: False",
+        "Education section detected: False",
+        "Projects section detected: False",
+        "Summary section detected: False"
+      ],
+      "raw_value": 0.1
+    },
+    "quality_achievements": {
+      "score": 100.0,
+      "summary": "Quality of bullets, quantified impact, and action-oriented writing.",
+      "evidence": [
+        "Bullet count: 2",
+        "Quantified lines: 20",
+        "Action-verb bullet ratio: 0.000"
+      ],
+      "raw_value": 1.0
+    },
+    "quality_readability": {
+      "score": 94.62,
+      "summary": "Resume length and line density suited for ATS readability.",
+      "evidence": [
+        "Word count: 357",
+        "Dense line ratio: 0.019"
+      ],
+      "raw_value": 0.9462264150943396
+    },
+    "quality_skills_clarity": {
+      "score": 0.0,
+      "summary": "Clarity and explicitness of the skills inventory.",
+      "evidence": [
+        "Unique parsed skills: 0"
+      ],
+      "raw_value": 0.0
+    }
+  },
+  "quality_breakdown": {
+    "contact": {
+      "score": 65.0,
+      "summary": "Availability of core contact information and professional links.",
+      "evidence": [
+        "Email present: True",
+        "Phone present: False",
+        "LinkedIn present: True",
+        "Portfolio/GitHub present: True"
+      ],
+      "raw_value": 0.65
+    },
+    "sections": {
+      "score": 10.0,
+      "summary": "Presence of ATS-friendly core resume sections.",
+      "evidence": [
+        "Skills section detected: False",
+        "Experience section detected: False",
+        "Education section detected: False",
+        "Projects section detected: False",
+        "Summary section detected: False"
+      ],
+      "raw_value": 0.1
+    },
+    "achievements": {
+      "score": 100.0,
+      "summary": "Quality of bullets, quantified impact, and action-oriented writing.",
+      "evidence": [
+        "Bullet count: 2",
+        "Quantified lines: 20",
+        "Action-verb bullet ratio: 0.000"
+      ],
+      "raw_value": 1.0
+    },
+    "readability": {
+      "score": 94.62,
+      "summary": "Resume length and line density suited for ATS readability.",
+      "evidence": [
+        "Word count: 357",
+        "Dense line ratio: 0.019"
+      ],
+      "raw_value": 0.9462264150943396
+    },
+    "skills_clarity": {
+      "score": 0.0,
+      "summary": "Clarity and explicitness of the skills inventory.",
+      "evidence": [
+        "Unique parsed skills: 0"
+      ],
+      "raw_value": 0.0
+    }
+  },
+  "match_breakdown": {
+    "skills": {
+      "score": 100.0,
+      "summary": "Required and preferred skill coverage derived from parsed fields plus resume text evidence.",
+      "evidence": [
+        "fastapi",
+        "microservices",
+        "python",
+        "rest api",
+        "sql"
+      ],
+      "raw_value": 1.0
+    },
+    "experience": {
+      "score": 100.0,
+      "summary": "Experience alignment derived from parsed experience fields and heuristic year extraction.",
+      "evidence": [
+        "Resume years detected: 4",
+        "Minimum required years: 3"
+      ],
+      "raw_value": 1.0
+    },
+    "education": {
+      "score": 100.0,
+      "summary": "Education alignment derived from parsed education fields and job qualifications.",
+      "evidence": [
+        "Resume education rank: 4",
+        "Job education rank: 3"
+      ],
+      "raw_value": 1.0
+    },
+    "keywords": {
+      "score": 37.71,
+      "summary": "Keyword overlap between resume, job title, and job description.",
+      "evidence": [
+        "fastapi",
+        "microservices",
+        "python",
+        "rest api",
+        "sql",
+        "git",
+        "linux",
+        "backend",
+        "developer",
+        "for"
+      ],
+      "raw_value": 0.11016949152542373
+    },
+    "semantic": {
+      "score": 56.71,
+      "summary": "Hybrid semantic similarity using embedding-style and TF-IDF similarity.",
+      "evidence": [
+        "Embedding similarity: 0.697",
+        "TF-IDF similarity: 0.408"
+      ],
+      "raw_value": 0.5670864433050156
+    },
+    "projects": {
+      "score": 8.26,
+      "summary": "Project and certification relevance against the role description.",
+      "evidence": [
+        "Project relevance: 0.110",
+        "Certification relevance: 0.000"
+      ],
+      "raw_value": 0.08262675
+    }
+  },
+  "feature_values": {
+    "embedding_similarity": 0.6970546245574951,
+    "tfidf_similarity": 0.40823644399642944,
+    "semantic_hint": 0.5670864433050156,
+    "keyword_overlap": 0.11016949152542373,
+    "title_match_score": 1.0,
+    "resume_word_count": 357.0,
+    "job_word_count": 55.0,
+    "length_ratio": 0.15406162464985995,
+    "resume_years_detected": 4.0,
+    "job_min_years": 3.0,
+    "experience_match_score": 1.0,
+    "resume_education_rank": 4.0,
+    "job_education_rank": 3.0,
+    "education_match_score": 1.0,
+    "required_skill_coverage": 1.0,
+    "preferred_skill_coverage": 1.0,
+    "missing_required_skill_ratio": 0.0,
+    "missing_required_skill_count": 0.0,
+    "skill_match_count": 5.0,
+    "project_relevance_score": 0.110169,
+    "certification_relevance_score": 0.0,
+    "resume_quality_score": 61.13,
+    "job_match_score": 67.54,
+    "combined_score": 64.66
+  },
+  "notes": [
+    "Model used: Random Forest",
+    "Parser mode: local_fallback",
+    "Legacy job-match score: 81.77",
+    "ML strong-match score: 62.80",
+    "Model ranking score: 54.93",
+    "Hybrid weight split -> legacy: 0.25, ml: 0.75",
+    "Missing or weak sections detected: skills, experience, education, summary",
+    "Core contact information appears incomplete.",
+    "Resume has few explicit bullet points; ATS and recruiter readability may suffer.",
+    "Resume quality score: 61.13",
+    "Job match score: 67.54",
+    "Combined score: 64.66"
+  ],
+  "score_version": "v3_split_quality_match"
+}

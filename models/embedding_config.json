@@ -1,0 +1,9 @@
+{
+  "model_name": "all-MiniLM-L6-v2",
+  "batch_size": 64,
+  "embedding_dim": 384,
+  "job_embeddings_file": "job_embeddings.npy",
+  "resume_embeddings_file": "resume_embeddings.npy",
+  "job_index_file": "embedding_job_index.csv",
+  "resume_index_file": "embedding_resume_index.csv"
+}

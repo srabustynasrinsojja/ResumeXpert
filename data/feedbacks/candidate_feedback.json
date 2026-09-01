@@ -1,0 +1,41 @@
+{
+  "summary": "Your base resume quality score is 61.13, this job match score is 67.54, and the combined screening score is 64.66.",
+  "match_label": "strong_match",
+  "ats_score": 64.66,
+  "resume_quality_score": 61.13,
+  "job_match_score": 67.54,
+  "combined_score": 64.66,
+  "strengths": [
+    "You already match these important skills: fastapi, microservices, python, rest api, sql",
+    "You also match these preferred skills: rest api, microservices, git, linux",
+    "Your experience level appears well aligned with the role."
+  ],
+  "improvement_areas": [
+    "Add stronger project bullets with outcomes, tools, and measurable impact.",
+    "Include more role-specific keywords such as: we, are, looking, 3+, required, preferred"
+  ],
+  "general_improvement_areas": [
+    "Add stronger project bullets with outcomes, tools, and measurable impact."
+  ],
+  "job_specific_improvement_areas": [
+    "Include more role-specific keywords such as: we, are, looking, 3+, required, preferred"
+  ],
+  "suggested_skills": [],
+  "suggested_keywords": [
+    "we",
+    "are",
+    "looking",
+    "3+",
+    "required",
+    "preferred"
+  ],
+  "next_steps": [
+    "Strengthen the base resume first so it works across multiple jobs.",
+    "Then tailor the summary and top skills section for this specific role.",
+    "Quantify achievements with metrics wherever possible."
+  ],
+  "rebuild_focus_areas": [
+    "Role-specific keyword coverage"
+  ],
+  "encouragement": "You are already a strong fit. A little tailoring can make the application even stronger."
+}

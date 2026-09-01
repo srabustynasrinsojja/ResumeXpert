@@ -1,0 +1,969 @@
+/* ── Tokens ── */
+:root {
+  /* ═══════════════════════════════════════════════════════════
+     PREMIUM TOKENS — same execution rigor (Stripe/Linear/Vercel-level
+     polish: consistent spacing, real shadows, proper micro-interactions)
+     but derived from YOUR existing ink/brass/cream palette, not a new
+     one. These values now match what JobBoard/RecruiterJobs/Profile/
+     MyApplications already use throughout, so this becomes the single
+     consistent theme, not a third competing look.
+     ═══════════════════════════════════════════════════════════ */
+  /* ═══════════════════════════════════════════════════════════
+     CHROME TOKENS — the top navbar + tab bars only. These stay the
+     deep forest green (matches the homepage identity) since that's
+     just a slim accent strip, not the whole screen.
+     ═══════════════════════════════════════════════════════════ */
+  --pm-chrome-bg:          #1a2815;
+  --pm-chrome-bg-hover:    #283d21;
+  --pm-chrome-border:      rgba(201,168,76,.16);
+  --pm-chrome-border-strong: rgba(201,168,76,.32);
+  --pm-chrome-text:        rgba(232,223,200,.95);
+  --pm-chrome-text-secondary: rgba(232,223,200,.62);
+  --pm-chrome-text-muted:  rgba(232,223,200,.42);
+
+  /* ═══════════════════════════════════════════════════════════
+     CARD TOKENS — every content card/panel (profile, applications,
+     job listings, etc). Light parchment/white, dark ink text —
+     matches the CV Quality Report card, not a separate dark theme.
+     ═══════════════════════════════════════════════════════════ */
+  --pm-bg:            #f5f1e4;
+  --pm-surface:       #fffdf8;   /* card surface — near-white parchment */
+  --pm-surface-sunken:#f0ead9;   /* inset areas, drop zones */
+  --pm-border:        rgba(90,64,32,.14);
+  --pm-border-strong: rgba(90,64,32,.24);
+
+  --pm-text:          #241a0c;   /* dark ink, matches --ink */
+  --pm-text-secondary:#5a4020;   /* matches --ink-soft */
+  --pm-text-muted:    #8a6a3a;   /* matches --ink-muted */
+
+  --pm-accent:        #b5860d;   /* brass, matches the rest of the app */
+  --pm-accent-hover:  #d4a017;
+  --pm-accent-on:     #1a1208;   /* dark text ON the brass fill — matches every other gold button in the app */
+  --pm-accent-bg:      rgba(181,134,13,.1);
+  --pm-accent-ring:    rgba(181,134,13,.3);
+
+  --pm-success:       #1f4a2e;
+  --pm-success-fill:  #2d6e42;
+  --pm-success-bg:    rgba(45,110,66,.1);
+  --pm-warning:       #a8720f;
+  --pm-warning-fill:  #c98d1f;
+  --pm-warning-bg:    rgba(201,141,31,.1);
+  --pm-danger:        #a8341f;
+  --pm-danger-fill:   #c04a30;
+  --pm-danger-bg:     rgba(192,74,48,.1);
+
+  --pm-radius-sm:      8px;
+  --pm-radius:         12px;
+  --pm-radius-lg:       18px;
+  --pm-shadow-sm:      0 1px 3px rgba(60,40,10,.08);
+  --pm-shadow-md:      0 8px 24px rgba(60,40,10,.1), 0 0 0 1px rgba(90,64,32,.05);
+  --pm-shadow-lg:      0 16px 40px rgba(60,40,10,.14), 0 0 0 1px rgba(90,64,32,.07);
+  --pm-font: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+
+  /* Aliases — several components reference these names directly;
+     defining them here keeps every card/nav/footer on one real,
+     resolvable token instead of silently falling back to nothing. */
+  --pm-card-bg:        var(--pm-surface);
+  --pm-card-bg-hover:  #f7f2e4;
+  --pm-accent-solid:   var(--pm-accent);
+
+  /* ── Module surfaces ──
+     Soft, warm surfaces for the logged-in candidate/recruiter shells —
+     replaces flat stock pastels (#EAF6FF / #E5F5E0) with tones drawn
+     from the same parchment/brass/burgundy family used everywhere else,
+     so the whole app reads as one continuous palette. */
+  --surface-candidate:      linear-gradient(165deg,#f3efe1 0%,#e7ecd8 55%,#eef0e0 100%);
+  --surface-candidate-glow: radial-gradient(circle at 12% 0%, rgba(45,110,66,.10), transparent 55%);
+  --surface-recruiter:      linear-gradient(165deg,#f6efe3 0%,#f1e4dd 55%,#f5ece1 100%);
+  --surface-recruiter-glow: radial-gradient(circle at 12% 0%, rgba(122,27,46,.09), transparent 55%);
+
+
+  --parchment:     #b9b486;
+  --parchment2:    #383428;
+  --parchment3:    #857d65;
+  --cream:         #d3c096;
+  --cream-dark:    #f2e8d0;
+
+  --ink:           #1c1208;
+  --ink2:          #2e1f0a;
+  --ink3:          #3d2b10;
+  --ink-soft:      #402d14;
+  --ink-muted:     #6b4f28;
+  --ink-faded:     #96723f;
+  --ink-ghost:     #b99d65;
+
+  --brass:         #b5860d;
+  --brass2:        #d4a017;
+  --brass-light:   #f0c84a;
+  --brass-soft:    rgba(181,134,13,.15);
+  --brass-glow:    rgba(212,160,23,.3);
+
+  --burgundy:      #7a1b2e;
+  --burgundy2:     #9b2235;
+  --burgundy-soft: rgba(122,27,46,.12);
+
+  --forest:        #1f4a2e;
+  --forest2:       #2d6e42;
+  --forest-soft:   rgba(31,74,46,.12);
+
+  --border:        rgba(90,64,32,.22);
+  --border2:       rgba(90,64,32,.10);
+  --border-brass:  rgba(181,134,13,.35);
+
+  --shadow-card:   0 4px 24px rgba(28,18,8,.12), inset 0 1px 0 rgba(255,255,255,.5);
+  --shadow-ink:    0 2px 12px rgba(28,18,8,.16);
+  --shadow-deep:   0 8px 40px rgba(28,18,8,.22);
+
+  --font:          'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+  --radius:        12px;
+  --radius-sm:     8px;
+  --radius-lg:     18px;
+  --nav-h:         64px;
+
+  --noise: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+}
+
+/* ── Reset ── */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{
+  font-family:var(--font);
+  background:var(--parchment);
+  color:var(--ink);
+  line-height:1.65;
+  font-size:15px;
+  -webkit-font-smoothing:antialiased;
+  background-image:var(--noise),
+    repeating-linear-gradient(0deg,transparent,transparent 31px,rgba(90,64,32,.04) 32px);
+}
+button,input,textarea{font:inherit;}
+button{cursor:pointer;border:none;background:none;}
+ul,ol{list-style:none;}
+::-webkit-scrollbar{width:7px;height:7px;}
+::-webkit-scrollbar-track{background:var(--parchment2);}
+::-webkit-scrollbar-thumb{background:var(--ink-ghost);border-radius:99px;}
+::-webkit-scrollbar-thumb:hover{background:var(--brass);}
+
+/* ══════════════════════════════════════
+   MODULE SHELLS — candidate / recruiter
+   These wrap the whole logged-in experience. Previously unstyled
+   (relied on ad-hoc inline flat pastel colors); now a single
+   consistent, textured, vintage-toned surface per role.
+══════════════════════════════════════ */
+.theme-candidate, .theme-recruiter{
+  min-height:100vh;
+  display:flex; flex-direction:column;
+}
+.theme-candidate > main, .theme-recruiter > main{
+  position:relative;
+  background-image:var(--noise);
+}
+.theme-candidate > main{
+  background:var(--surface-candidate-glow), var(--surface-candidate);
+}
+.theme-recruiter > main{
+  background:var(--surface-recruiter-glow), var(--surface-recruiter);
+}
+
+/* ── Responsive utility ── */
+@media (max-width: 480px) {
+  .rx-hide-mobile { display:none; }
+}
+
+/* ── Keyframes ── */
+@keyframes fadeUp{from{opacity:0;transform:translateY(16px);}to{opacity:1;transform:translateY(0);}}
+@keyframes fadeIn{from{opacity:0;}to{opacity:1;}}
+@keyframes spin{to{transform:rotate(360deg);}}
+@keyframes pulse-brass{0%,100%{box-shadow:0 0 0 0 var(--brass-glow);}50%{box-shadow:0 0 0 6px transparent;}}
+
+/* ══════════════════════════════════════
+   NAVBAR
+══════════════════════════════════════ */
+.navbar{
+  position:sticky;top:0;z-index:100;
+  height:var(--nav-h);
+  background:var(--ink);
+  border-bottom:3px solid var(--brass);
+  display:flex;align-items:center;
+  padding:0 36px;gap:auto;
+  justify-content:space-between;
+  box-shadow:0 4px 20px rgba(28,18,8,.5);
+}
+.navbar::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:3px;
+  background:linear-gradient(90deg,var(--burgundy),var(--brass2),var(--burgundy));
+}
+.nav-brand{display:flex;align-items:center;gap:10px;cursor:default;}
+.nav-logo-seal{
+  width:38px;height:38px;border-radius:50%;
+  background:radial-gradient(circle at 35% 30%,var(--brass2),var(--brass));
+  display:flex;align-items:center;justify-content:center;
+  font-size:16px;color:var(--ink);
+  box-shadow:0 2px 8px rgba(181,134,13,.4);
+}
+.nav-name{font-size:19px;font-weight:bold;color:var(--parchment);letter-spacing:.04em;}
+.nav-subtitle{font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--brass);display:block;margin-top:-3px;}
+.nav-status{
+  display:flex;align-items:center;gap:8px;font-size:12px;color:var(--ink-ghost);
+  background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);
+  padding:6px 14px;border-radius:999px;
+}
+.status-dot{width:7px;height:7px;border-radius:50%;}
+.status-dot.alive{background:#4ade80;box-shadow:0 0 6px #4ade80;animation:pulse-brass 2s infinite;}
+.status-dot.dead{background:var(--burgundy2);}
+
+/* ══════════════════════════════════════
+   MAIN LAYOUT
+══════════════════════════════════════ */
+.app-main{
+  max-width:1100px;
+  margin:0 auto;
+  padding:0 32px 80px;
+}
+
+/* ── Hero heading ── */
+.app-hero{
+  text-align:center;
+  padding:56px 24px 40px;
+  position:relative;
+}
+.app-eyebrow{
+  font-size:11px;font-weight:bold;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--brass);margin-bottom:16px;
+}
+.app-title{
+  font-size:clamp(28px,5vw,52px);font-weight:bold;
+  color:var(--ink);line-height:1.1;letter-spacing:-.02em;margin-bottom:14px;
+  animation:fadeUp .6s ease both;
+}
+.app-accent{color:var(--brass2);}
+.app-sub{
+  font-size:15px;color:var(--ink-soft);max-width:520px;
+  margin:0 auto;line-height:1.7;
+  animation:fadeUp .6s ease .1s both;
+}
+
+/* ── Workspace container ── */
+.app-workspace{
+  display:flex;flex-direction:column;gap:20px;
+  animation:fadeUp .5s ease .15s both;
+}
+
+/* ── Step blocks ── */
+.step-block{
+  background:var(--cream);
+  border:1px solid var(--border);
+  border-radius:var(--radius-lg);
+  padding:24px 28px;
+  box-shadow:var(--shadow-card);
+  position:relative;overflow:hidden;
+}
+.step-block::before{
+  content:'';position:absolute;inset:0;
+  background:var(--noise);pointer-events:none;opacity:.5;
+}
+
+.step-label{
+  display:flex;align-items:center;gap:12px;
+  font-size:13px;font-weight:bold;text-transform:uppercase;
+  letter-spacing:.08em;color:var(--ink-soft);
+  margin-bottom:18px;
+  position:relative;
+}
+.step-num-badge{
+  display:inline-flex;align-items:center;justify-content:center;
+  width:26px;height:26px;border-radius:50%;
+  background:var(--brass2);color:var(--ink);
+  font-size:12px;font-weight:bold;flex-shrink:0;
+  box-shadow:2px 2px 0 rgba(28,18,8,.2);
+}
+
+/* ── Upload two-column ── */
+.upload-cols{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
+.upload-col{display:flex;flex-direction:column;gap:8px;}
+.field-label{font-size:12.5px;font-weight:bold;letter-spacing:.07em;text-transform:uppercase;color:var(--ink-soft);}
+
+/* ── Drop zone ── */
+.v-drop{
+  border:2.5px dashed var(--border);border-radius:var(--radius);
+  padding:24px;display:flex;align-items:center;justify-content:center;
+  cursor:pointer;transition:all .2s;min-height:130px;background:var(--parchment2);
+}
+.v-drop:hover{border-color:var(--brass);background:var(--cream-dark);}
+.v-drop.over{border-color:var(--brass2);background:var(--brass-soft);border-style:solid;}
+.v-drop.filled{border-style:solid;border-color:rgba(31,74,46,.4);background:var(--forest-soft);}
+.v-drop-empty{text-align:center;}
+.v-drop-icon{font-size:36px;margin-bottom:6px;color:var(--ink-faded);display:block;}
+.v-drop-title{font-weight:bold;font-size:14px;color:var(--ink-soft);margin-bottom:3px;}
+.v-drop-hint{font-size:12px;color:var(--ink-muted);}
+.v-drop-file{display:flex;align-items:center;gap:14px;width:100%;}
+.v-drop-file-ico{font-size:30px;}
+.v-drop-name{font-weight:bold;font-size:13px;color:var(--ink2);word-break:break-all;}
+.v-drop-size{font-size:11px;color:var(--ink-muted);margin-top:2px;}
+.v-drop-remove{
+  background:var(--burgundy-soft);color:var(--burgundy);
+  border:1.5px solid rgba(122,27,46,.3);border-radius:var(--radius-sm);
+  padding:5px 10px;font-size:12px;font-family:var(--font);
+  cursor:pointer;flex-shrink:0;transition:all .2s;
+}
+.v-drop-remove:hover{background:var(--burgundy);color:var(--cream);}
+
+/* ── JD textarea ── */
+.jd-area{
+  background:var(--parchment);border:1.5px solid var(--border);
+  border-radius:var(--radius-sm);color:var(--ink);
+  padding:12px 14px;resize:vertical;width:100%;font-size:14px;
+  line-height:1.65;transition:border-color .2s;
+  background-image:repeating-linear-gradient(to bottom,transparent,transparent 27px,rgba(90,64,32,.06) 28px);
+}
+.jd-area:focus{outline:none;border-color:var(--brass);}
+.jd-area::placeholder{color:var(--ink-faded);}
+
+/* ══════════════════════════════════════
+   PERSPECTIVE CARDS
+══════════════════════════════════════ */
+.persp-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
+
+.persp-card{
+  display:flex;flex-direction:column;gap:10px;
+  padding:22px 20px;border-radius:var(--radius);
+  border:2px solid var(--border);
+  background:var(--parchment2);
+  text-align:left;cursor:pointer;
+  transition:all .2s ease;
+  position:relative;
+}
+.persp-card:hover{transform:translateY(-3px);box-shadow:var(--shadow-deep);}
+
+/* Brass — ATS Score */
+.persp-brass{border-color:rgba(181,134,13,.3);}
+.persp-brass:hover{border-color:var(--brass);background:rgba(181,134,13,.06);}
+.persp-brass.persp-selected{border-color:var(--brass2);background:var(--brass-soft);box-shadow:0 0 0 3px var(--brass-glow),var(--shadow-deep);}
+
+/* Burgundy — Recruiter */
+.persp-burgundy{border-color:rgba(122,27,46,.25);}
+.persp-burgundy:hover{border-color:var(--burgundy);background:rgba(122,27,46,.05);}
+.persp-burgundy.persp-selected{border-color:var(--burgundy2);background:var(--burgundy-soft);box-shadow:0 0 0 3px rgba(122,27,46,.25),var(--shadow-deep);}
+
+/* Forest — Candidate */
+.persp-forest{border-color:rgba(31,74,46,.25);}
+.persp-forest:hover{border-color:var(--forest2);background:rgba(31,74,46,.05);}
+.persp-forest.persp-selected{border-color:var(--forest2);background:var(--forest-soft);box-shadow:0 0 0 3px rgba(31,74,46,.25),var(--shadow-deep);}
+
+.persp-top{display:flex;align-items:center;justify-content:space-between;}
+.persp-icon{font-size:28px;line-height:1;}
+.persp-check{
+  width:24px;height:24px;border-radius:50%;
+  background:var(--forest2);color:#fff;
+  display:flex;align-items:center;justify-content:center;
+  font-size:13px;font-weight:bold;
+  animation:fadeIn .2s ease both;
+}
+.persp-brass.persp-selected  .persp-check{background:var(--brass2);color:var(--ink);}
+.persp-burgundy.persp-selected .persp-check{background:var(--burgundy2);}
+
+.persp-title{font-size:16px;font-weight:bold;color:var(--ink);}
+.persp-desc{font-size:13px;color:var(--ink-muted);line-height:1.6;}
+
+/* ══════════════════════════════════════
+   RUN BAR
+══════════════════════════════════════ */
+.run-bar{
+  display:flex;align-items:center;
+  justify-content:space-between;gap:24px;flex-wrap:wrap;
+}
+.run-checklist{display:flex;flex-direction:column;gap:7px;}
+.run-check{font-size:13px;color:var(--ink-muted);}
+.run-check.done{color:var(--forest2);font-weight:bold;}
+.run-actions{display:flex;gap:12px;flex-wrap:wrap;flex-shrink:0;}
+
+/* ── Stamp button ── */
+.stamp-btn{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:12px 22px;border-radius:var(--radius-sm);
+  font-family:var(--font);font-weight:bold;font-size:14px;
+  border:2.5px solid var(--brass);
+  background:linear-gradient(135deg,var(--brass2),var(--brass));
+  color:var(--ink);
+  box-shadow:3px 3px 0 var(--ink3),0 0 14px var(--brass-glow);
+  cursor:pointer;transition:all .15s ease;
+  text-transform:uppercase;letter-spacing:.05em;
+  position:relative;overflow:hidden;
+}
+.stamp-btn::before{
+  content:'';position:absolute;top:0;left:-100%;width:60%;height:100%;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.22),transparent);
+  transition:left .4s ease;
+}
+.stamp-btn:hover::before{left:150%;}
+.stamp-btn:hover{transform:translate(-1px,-1px);box-shadow:4px 4px 0 var(--ink3),0 0 22px var(--brass-glow);}
+.stamp-btn:active{transform:translate(1px,1px);box-shadow:1px 1px 0 var(--ink3);}
+.stamp-btn:disabled{opacity:.4;cursor:not-allowed;transform:none;box-shadow:2px 2px 0 var(--ink3);}
+.stamp-btn.secondary{
+  background:linear-gradient(135deg,var(--parchment),var(--parchment2));
+  border-color:var(--border);color:var(--ink-soft);
+  box-shadow:2px 2px 0 var(--border);
+}
+.stamp-btn.secondary:hover{border-color:var(--brass);color:var(--ink);box-shadow:3px 3px 0 var(--border);}
+
+/* ── Spinner ── */
+.v-spinner-wrap{display:flex;align-items:center;gap:12px;padding:14px 0;color:var(--ink-muted);font-size:14px;}
+.v-spinner{width:26px;height:26px;border:3px solid var(--parchment3);border-top-color:var(--brass);border-radius:50%;animation:spin .8s linear infinite;}
+
+/* ── Error ── */
+.error-note{
+  background:var(--burgundy-soft);border:1.5px solid rgba(122,27,46,.3);
+  border-left:4px solid var(--burgundy);color:var(--burgundy2);
+  border-radius:var(--radius-sm);padding:12px 16px;font-size:13px;font-weight:bold;
+}
+
+/* ══════════════════════════════════════
+   RESULTS AREA
+══════════════════════════════════════ */
+.results-wrap{
+  margin-top:28px;
+  animation:fadeUp .45s ease both;
+}
+.results-tab-bar{
+  display:flex;align-items:center;justify-content:space-between;
+  background:var(--ink);color:var(--parchment);
+  border-radius:var(--radius) var(--radius) 0 0;
+  padding:14px 24px;
+  border-bottom:3px solid var(--brass);
+}
+.results-tab-label{font-size:14px;font-weight:bold;letter-spacing:.05em;}
+
+.result-section{
+  background:var(--cream);border:1px solid var(--border);
+  border-top:none;border-radius:0 0 var(--radius-lg) var(--radius-lg);
+  padding:28px;display:flex;flex-direction:column;gap:22px;
+}
+
+/* ── Result hero ── */
+.result-hero{
+  display:flex;gap:28px;align-items:center;
+  background:var(--parchment2);border:1px solid var(--border);
+  border-radius:var(--radius);padding:24px;flex-wrap:wrap;
+}
+.rh-ring{text-align:center;flex-shrink:0;}
+.ring-label{font-size:11px;color:var(--ink-muted);margin-top:5px;text-transform:uppercase;letter-spacing:.06em;}
+.rh-meta{flex:1;display:flex;flex-direction:column;gap:12px;}
+.rh-headline{font-size:22px;font-weight:bold;color:var(--ink);letter-spacing:-.01em;}
+
+.stat-row{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;}
+.stat-box{
+  background:var(--cream);border:1px solid var(--border);
+  border-radius:var(--radius-sm);padding:10px;
+  box-shadow:1px 1px 0 var(--border2);
+}
+.stat-box span{display:block;font-size:10px;font-weight:bold;text-transform:uppercase;letter-spacing:.07em;color:var(--ink-muted);margin-bottom:3px;}
+.stat-box strong{font-size:16px;font-weight:bold;color:var(--ink2);}
+
+.prob-row{display:flex;gap:10px;flex-wrap:wrap;}
+.prob-item{
+  flex:1;min-width:90px;background:var(--cream);
+  border:1px solid var(--border);border-radius:var(--radius-sm);
+  padding:8px;text-align:center;
+}
+.prob-item span{display:block;font-size:10px;text-transform:capitalize;color:var(--ink-muted);margin-bottom:2px;}
+.prob-item strong{font-size:15px;font-weight:bold;color:var(--brass2);}
+
+/* ── Vcard (result cards) ── */
+.vcard{
+  background:var(--cream);border:1px solid var(--border);
+  border-radius:var(--radius);padding:20px;
+  box-shadow:var(--shadow-card);position:relative;overflow:hidden;
+}
+.vcard::before{content:'';position:absolute;inset:0;background:var(--noise);pointer-events:none;opacity:.5;}
+.card-h{font-size:15px;font-weight:bold;color:var(--ink);margin-bottom:14px;}
+
+/* Quick Screen (RecruiterDashboard) reuses the vintage .vcard/.app-workspace
+   markup, but needs to visually match its sibling tabs — Job Postings and
+   Company Profile — which use the pm-card-bg system. Scoped so nothing else
+   sharing .vcard (CV Builder, Tailor for Job) is affected. */
+.rd-scope{ font-family:var(--pm-font); }
+.rd-scope .app-workspace{ max-width:1100px; margin:0 auto; }
+.rd-scope .rd-section{
+  padding:20px 0; border-bottom:1px solid var(--pm-border);
+}
+.rd-scope .rd-section:first-of-type{ padding-top:2px; }
+.rd-scope .step-block{
+  background:var(--pm-card-bg); border:1px solid var(--pm-border);
+  box-shadow:var(--pm-shadow-sm);
+}
+.rd-scope .step-block::before{ display:none; }
+.rd-scope .vcard{
+  background:var(--pm-card-bg); border:1px solid var(--pm-border);
+  border-radius:var(--pm-radius); box-shadow:var(--pm-shadow-sm);
+}
+.rd-scope .vcard::before{ display:none; }
+.rd-scope .card-h{ font-family:var(--pm-font); color:var(--ink); }
+.rd-scope .results-wrap{ margin-top:0; }
+.rd-scope .result-section{
+  background:var(--pm-card-bg); border:1px solid var(--pm-border);
+  border-radius:var(--pm-radius-lg); box-shadow:var(--pm-shadow-md);
+  padding:26px 28px 30px;
+}
+.rd-scope .stat-box{
+  background:var(--pm-surface-sunken); border:1px solid var(--pm-border); box-shadow:none;
+}
+.rd-scope .stat-box strong{ color:var(--ink); }
+.rd-scope .prob-item{ background:var(--pm-surface-sunken); border:1px solid var(--pm-border); }
+.rd-scope .result-hero{ background:var(--pm-surface-sunken); border:1px solid var(--pm-border); }
+
+/* Tailor for Job reuses the same vintage .step-block/.vcard/.results-tab-bar
+   markup as CV Builder/Check CV, but (unlike those two) needs to visually
+   match the rest of the app's pm-card-bg system instead of staying in the
+   old dark-ink/cream vintage palette. Scoped so CV Builder/Check CV, which
+   already look right, are untouched. */
+.tj-scope{ font-family:var(--pm-font); }
+.tj-scope .step-block{
+  background:var(--pm-card-bg); border:1px solid var(--pm-border);
+  box-shadow:var(--pm-shadow-sm);
+}
+.tj-scope .step-block::before{ display:none; }
+.tj-scope .vcard{
+  background:var(--pm-card-bg); border:1px solid var(--pm-border);
+  border-radius:var(--pm-radius); box-shadow:var(--pm-shadow-sm);
+}
+.tj-scope .vcard::before{ display:none; }
+.tj-scope .card-h{ font-family:var(--pm-font); color:var(--ink); }
+.tj-scope .results-wrap{ margin-top:0; }
+.tj-scope .results-tab-bar{
+  background:var(--pm-card-bg); color:var(--ink);
+  border:1px solid var(--pm-border); border-bottom:2px solid var(--brass);
+}
+.tj-scope .results-tab-label{ color:var(--ink); }
+.tj-scope .result-section{
+  background:var(--pm-card-bg); border:1px solid var(--pm-border);
+  border-top:none; box-shadow:var(--pm-shadow-md);
+}
+.tj-scope .rec-cta-card{ background:var(--pm-surface-sunken); border:1px solid var(--pm-border); }
+
+/* ── Breakdown grid ── */
+.breakdown-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;}
+.breakdown-card{display:flex;flex-direction:column;gap:8px;}
+
+/* ── VBar ── */
+.vbar-wrap{display:flex;flex-direction:column;gap:5px;}
+.vbar-header{display:flex;justify-content:space-between;align-items:baseline;}
+.vbar-label{font-size:13px;font-weight:bold;color:var(--ink2);}
+.vbar-val{font-size:13px;font-weight:bold;}
+.vbar-track{height:9px;background:var(--parchment3);border-radius:999px;border:1px solid var(--border);overflow:hidden;box-shadow:inset 0 1px 3px rgba(28,18,8,.1);}
+.vbar-fill{height:100%;border-radius:999px;transition:width 1.2s cubic-bezier(0.16,1,0.3,1);position:relative;}
+.vbar-fill::after{content:'';position:absolute;top:2px;left:6px;right:6px;height:3px;background:rgba(255,255,255,.35);border-radius:999px;}
+.vbar-sub{font-size:11px;color:var(--ink-muted);}
+
+/* ── Tags & pills ── */
+.pill-row{display:flex;flex-wrap:wrap;gap:7px;}
+.vtag{display:inline-flex;align-items:center;padding:4px 11px;border-radius:999px;font-size:12px;font-weight:bold;border:1.5px solid currentColor;}
+.vtag.green{color:var(--forest2);background:var(--forest-soft);}
+.vtag.red{color:var(--burgundy2);background:var(--burgundy-soft);}
+.vtag.amber{color:var(--brass);background:var(--brass-soft);}
+.vtag.blue{color:var(--ink-soft);background:rgba(90,64,32,.08);border-color:var(--border);}
+
+.lp-badge{
+  display:inline-flex;align-items:center;padding:4px 12px;border-radius:4px;
+  font-size:11px;font-weight:bold;letter-spacing:.1em;text-transform:uppercase;
+  border:2px solid currentColor;position:relative;
+}
+.lp-badge::after{content:'';position:absolute;inset:2px;border-radius:2px;border:1px solid currentColor;opacity:.3;}
+.lp-badge.green{color:var(--forest2);background:var(--forest-soft);}
+.lp-badge.amber{color:var(--brass);background:var(--brass-soft);}
+.lp-badge.red{color:var(--burgundy2);background:var(--burgundy-soft);}
+
+/* ── Deco rule ── */
+.deco-rule{display:flex;align-items:center;gap:14px;color:var(--ink-faded);font-size:14px;letter-spacing:.2em;}
+.deco-rule::before,.deco-rule::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,transparent,var(--brass),transparent);}
+
+/* ── Notes ── */
+.notes-card{background:var(--parchment2)!important;}
+.notes-list{display:flex;flex-direction:column;gap:7px;}
+.notes-list li{font-size:13px;color:var(--ink-soft);padding:8px 12px;background:var(--cream);border-radius:var(--radius-sm);border-left:3px solid var(--brass);}
+
+/* ── Recruiter specific ── */
+.rec-cta-card{
+  display:flex;gap:14px;align-items:flex-start;
+  background:var(--brass-soft);border:1.5px solid var(--border-brass);
+  border-radius:var(--radius-sm);padding:14px 16px;
+}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:16px;align-items:start;}
+.vlist{display:flex;flex-direction:column;gap:7px;}
+.vlist li{padding:9px 13px;border-radius:var(--radius-sm);font-size:14px;}
+.vlist.green li{background:var(--forest-soft);border-left:3px solid var(--forest2);color:var(--ink2);}
+.vlist.red li{background:var(--burgundy-soft);border-left:3px solid var(--burgundy2);color:var(--ink2);}
+.vlist.numbered{counter-reset:nlc;}
+.vlist.numbered li{padding-left:34px;position:relative;counter-increment:nlc;background:var(--parchment2);border-left:none;}
+.vlist.numbered li::before{content:counter(nlc);position:absolute;left:11px;top:50%;transform:translateY(-50%);font-size:12px;font-weight:bold;color:var(--brass2);}
+.action-list{display:flex;flex-direction:column;gap:7px;}
+.action-item{display:flex;align-items:center;gap:9px;padding:9px 13px;background:var(--parchment2);border-radius:var(--radius-sm);font-size:14px;border:1px solid var(--border);}
+.action-arrow{color:var(--brass2);font-size:15px;flex-shrink:0;}
+
+/* ── Candidate specific ── */
+.strength-list{display:flex;flex-direction:column;gap:9px;}
+.strength-item{display:flex;gap:13px;align-items:flex-start;padding:11px 14px;background:var(--forest-soft);border-radius:var(--radius-sm);border-left:3px solid var(--forest2);}
+.strength-num{font-weight:bold;font-size:13px;color:var(--forest2);flex-shrink:0;min-width:24px;}
+.strength-item p{font-size:14px;color:var(--ink2);}
+.improve-list{display:flex;flex-direction:column;gap:9px;}
+.improve-item{display:flex;gap:11px;align-items:flex-start;padding:11px 14px;background:var(--brass-soft);border-radius:var(--radius-sm);border-left:3px solid var(--brass);}
+.improve-dot{width:8px;height:8px;border-radius:50%;background:var(--brass2);flex-shrink:0;margin-top:6px;}
+.improve-item p{font-size:14px;color:var(--ink2);}
+.steps-list{display:flex;flex-direction:column;gap:11px;}
+.step-item{display:flex;gap:14px;align-items:flex-start;}
+.step-num{width:30px;height:30px;border-radius:50%;background:var(--brass2);color:var(--ink);font-weight:bold;font-size:13px;display:flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:2px 2px 0 var(--border);}
+.step-item p{font-size:14px;color:var(--ink-soft);padding-top:5px;}
+
+/* ── Parser json ── */
+.json-pre{background:var(--ink);color:#d4b880;padding:14px;border-radius:var(--radius-sm);font-size:11px;overflow-x:auto;max-height:360px;overflow-y:auto;border:1px solid rgba(212,184,128,.15);line-height:1.55;font-family:'Courier New',monospace;}
+
+/* ── Misc ── */
+.kw-label{font-size:12px;font-weight:bold;text-transform:uppercase;letter-spacing:.07em;}
+.green-text{color:var(--forest2);}
+.red-text{color:var(--burgundy2);}
+.muted-text{font-size:13px;color:var(--ink-muted);}
+
+/* ── Footer ── */
+.footer{background:var(--ink);border-top:3px solid var(--brass);padding:36px;position:relative;overflow:hidden;margin-top:60px;}
+.footer::before{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--burgundy),var(--brass2),var(--burgundy));}
+.footer-inner{max-width:1100px;margin:0 auto;display:grid;gap:24px;align-items:center;}
+.footer-brand{display:flex;align-items:center;gap:10px;}
+.footer-brand-name{font-size:17px;font-weight:bold;color:var(--parchment);}
+.footer-brand-sub{font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--brass);display:block;}
+.footer-note{font-size:11px;color:var(--ink-faded);text-align:right;letter-spacing:.04em;}
+.footer-ornament{text-align:center;color:var(--brass);font-size:13px;letter-spacing:.4em;margin-top:24px;opacity:.5;}
+
+/* ── Responsive ── */
+@media(max-width:900px){
+  .upload-cols{grid-template-columns:1fr;}
+  .persp-grid{grid-template-columns:1fr;}
+  .breakdown-grid{grid-template-columns:repeat(2,1fr);}
+  .two-col{grid-template-columns:1fr;}
+  .stat-row{grid-template-columns:repeat(2,1fr);}
+  .run-bar{flex-direction:column;align-items:flex-start;}
+  .app-main{padding:0 16px 60px;}
+  .navbar{padding:0 16px;}
+  .footer-inner{grid-template-columns:1fr;}
+  .footer-note{text-align:left;}
+}
+@media(max-width:560px){
+  .breakdown-grid{grid-template-columns:1fr;}
+  .result-hero{flex-direction:column;}
+  .app-title{font-size:26px;}
+}/* ── Auth Page ── */
+.auth-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+.auth-card {
+  width: 100%;
+  max-width: 420px;
+  padding: 36px 32px;
+}
+.auth-tabs {
+  display: flex;
+  gap: 0;
+  margin-bottom: 24px;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+}
+.auth-tab {
+  flex: 1;
+  padding: 10px;
+  font-size: 13px;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  color: var(--ink-muted);
+  background: var(--parchment2);
+  border: none;
+  cursor: pointer;
+  transition: all .2s;
+}
+.auth-tab.active {
+  background: var(--brass);
+  color: var(--ink);
+}
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.auth-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.auth-input {
+  padding: 11px 14px;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--cream);
+  font-size: 14px;
+  color: var(--ink);
+  transition: border-color .2s;
+}
+.auth-input:focus {
+  outline: none;
+  border-color: var(--brass);
+  box-shadow: 0 0 0 3px var(--brass-soft);
+}
+.auth-input::placeholder {
+  color: var(--ink-faded);
+}
+.auth-role-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+.auth-role-btn {
+  padding: 10px;
+  border: 2px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--cream);
+  font-size: 13px;
+  font-weight: bold;
+  color: var(--ink-soft);
+  cursor: pointer;
+  transition: all .2s;
+}
+.auth-role-btn.active {
+  border-color: var(--brass);
+  background: var(--brass-soft);
+  color: var(--ink);
+}
+.auth-role-btn:hover {
+  border-color: var(--brass);
+}
+
+/* ══════════════════════════════════════
+   RECRUITER DASHBOARD
+══════════════════════════════════════ */
+.rd-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 16px;
+  background: var(--cream);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: all .15s ease;
+  box-shadow: var(--shadow-card);
+  position: relative;
+  overflow: hidden;
+}
+.rd-row::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--noise);
+  pointer-events: none;
+  opacity: .4;
+}
+.rd-row:hover {
+  border-color: var(--brass);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-deep);
+}
+.rd-rank {
+  font-size: 13px;
+  font-weight: bold;
+  color: var(--brass2);
+  min-width: 30px;
+  text-align: center;
+}
+.rd-info { flex: 1; min-width: 0; }
+.rd-name { font-size: 14px; font-weight: bold; color: var(--ink); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.rd-file { font-size: 11px; color: var(--ink-muted); }
+.rd-scores {
+  display: flex;
+  gap: 8px;
+  font-size: 11px;
+  color: var(--ink-soft);
+  font-weight: bold;
+}
+.rd-scores span {
+  background: var(--parchment2);
+  padding: 2px 8px;
+  border-radius: 4px;
+  border: 1px solid var(--border2);
+}
+.rd-arrow {
+  font-size: 18px;
+  color: var(--brass);
+  flex-shrink: 0;
+}
+
+/* ── Recruiter modal ── */
+.rd-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(28, 18, 8, .6);
+  z-index: 200;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 40px 20px;
+  overflow-y: auto;
+}
+.rd-modal {
+  background: var(--cream);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  max-width: 800px;
+  width: 100%;
+  box-shadow: var(--shadow-deep);
+  position: relative;
+  overflow: hidden;
+}
+.rd-modal::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--noise);
+  pointer-events: none;
+  opacity: .5;
+}
+.rd-modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 24px;
+  background: var(--ink);
+  color: var(--parchment);
+  border-bottom: 3px solid var(--brass);
+  position: relative;
+}
+.rd-modal-body {
+  padding: 24px;
+  position: relative;
+}
+
+@media (max-width: 900px) {
+  .rd-row { flex-wrap: wrap; }
+  .rd-scores { display: none; }
+  .rd-modal { margin: 20px; }
+}
+
+/* ══════════════════════════════════════
+   CV BUILDER
+══════════════════════════════════════ */
+.cv-field { display: flex; flex-direction: column; gap: 5px; }
+.cv-list-section { margin-bottom: 8px; }
+.cv-list-item {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  padding: 12px;
+  background: var(--parchment2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  margin-bottom: 8px;
+}
+
+/* ── Page tabs (candidate) ── */
+.page-tabs {
+  display: flex;
+  gap: 0;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  max-width: 400px;
+  margin: 0 auto 24px;
+}
+.page-tab {
+  flex: 1;
+  padding: 10px 16px;
+  font-size: 13px;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  color: var(--ink-muted);
+  background: var(--parchment2);
+  border: none;
+  cursor: pointer;
+  transition: all .2s;
+  text-align: center;
+}
+.page-tab.active {
+  background: var(--brass);
+  color: var(--ink);
+}
+.page-tab:hover:not(.active) {
+  color: var(--ink-soft);
+  background: var(--cream-dark);
+}
+
+/* ── CV option cards ── */
+.vcard:hover { border-color: var(--brass); box-shadow: var(--shadow-deep); transform: translateY(-2px); }
+.cv-option-disabled { opacity: 0.6; }
+.cv-option-disabled:hover { border-color: var(--border); box-shadow: var(--shadow-card); transform: none; }
+
+/* ═══════════════════════════════════════════════════════════
+   PREMIUM MICRO-INTERACTIONS — pairs with the --pm- tokens above.
+   ═══════════════════════════════════════════════════════════ */
+
+/* Skeleton shimmer — used while any background op (parsing, scoring,
+   bulk screening) is running. Two layers: a static base tone plus a
+   moving highlight band, which reads as "actively working" rather
+   than a flat pulsing block. */
+@keyframes pm-shimmer {
+  0%   { background-position: -400px 0; }
+  100% { background-position: 400px 0; }
+}
+.pm-skeleton {
+  background: var(--pm-surface-sunken);
+  background-image: linear-gradient(
+    90deg,
+    var(--pm-surface-sunken) 0%,
+    rgba(201,168,76,.16) 50%,
+    var(--pm-surface-sunken) 100%
+  );
+  background-size: 400px 100%;
+  animation: pm-shimmer 1.4s ease-in-out infinite;
+  border-radius: var(--pm-radius-sm);
+}
+
+/* Card hover — lift + border brighten + soft shadow grow. */
+.pm-card {
+  background: var(--pm-surface);
+  border: 1px solid var(--pm-border);
+  border-radius: var(--pm-radius);
+  box-shadow: var(--pm-shadow-sm);
+  transition: transform .2s cubic-bezier(.16,1,.3,1),
+              box-shadow .2s cubic-bezier(.16,1,.3,1),
+              border-color .2s ease;
+}
+.pm-card--interactive:hover {
+  transform: translateY(-2px) scale(1.005);
+  box-shadow: var(--pm-shadow-md);
+  border-color: var(--pm-border-strong);
+}
+
+/* Glass surface — for hero areas / overlays over imagery or color. */
+.pm-glass {
+  background: rgba(28,18,8,.72);
+  backdrop-filter: blur(12px) saturate(1.4);
+  -webkit-backdrop-filter: blur(12px) saturate(1.4);
+  border: 1px solid rgba(201,168,76,.18);
+}
+
+/* Focus ring — matches the accent token, visible on keyboard nav. */
+.pm-focusable:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px var(--pm-surface), 0 0 0 4px var(--pm-accent-ring);
+}
+
+/* Button press feedback. */
+.pm-pressable:active { transform: scale(.98); }
+
+/* Fade-in for content that just finished loading (pairs with skeleton). */
+@keyframes pm-fade-in {
+  from { opacity: 0; transform: translateY(4px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.pm-enter { animation: pm-fade-in .3s cubic-bezier(.16,1,.3,1) both; }

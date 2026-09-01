@@ -1,0 +1,33 @@
+# Environment
+.env
+.env.*
+!.env.example
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# Node
+node_modules/
+dist/
+build/
+
+# Vite cache
+frontend/.vite/
+
+# IDE
+.vscode/
+
+# Backup files
+*.bak
+
+# Archives
+*.rar
+*.zip
+
+
+# CV files
+data/test_resumes/
+data/parsed_resumes/
