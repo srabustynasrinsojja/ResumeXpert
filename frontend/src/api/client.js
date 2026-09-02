@@ -1,4 +1,4 @@
-const API = import.meta.env.VITE_API_BASE_URL || "http://127.0.0.1:8000";
+const API = import.meta.env.VITE_API_BASE_URL || "https://resumexpert-dt38.onrender.com";
 
 // ── Token management ────────────────────────────────────────────
 export function getToken() { return localStorage.getItem("ats_token"); }
@@ -24,13 +24,7 @@ async function jsonReq(method, endpoint, body) {
     body: body ? JSON.stringify(body) : undefined,
   });
   let d; try { d = await r.json(); } catch { d = { detail: "Invalid response" }; }
-  if (!r.ok) {
-    const message = typeof d?.detail === "string" ? d.detail : (d?.detail?.message || `Request failed (${r.status})`);
-    const err = new Error(message);
-    err.detail = d?.detail;
-    err.status = r.status;
-    throw err;
-  }
+  if (!r.ok) throw new Error(d?.detail || `Request failed (${r.status})`);
   return d;
 }
 
@@ -47,20 +41,11 @@ async function formReq(endpoint, fd) {
 }
 
 // ── Auth ────────────────────────────────────────────────────────
-export const registerStart = (email, full_name, role) =>
-  jsonReq("POST", "/auth/register/start", { email, full_name, role });
-
-export const registerVerify = (email, otp, password) =>
-  jsonReq("POST", "/auth/register/verify", { email, otp, password });
-
-export const registerResend = (email) =>
-  jsonReq("POST", "/auth/register/resend", { email });
+export const register = (email, password, full_name, role) =>
+  jsonReq("POST", "/auth/register", { email, password, full_name, role });
 
 export const login = (email, password) =>
   jsonReq("POST", "/auth/login", { email, password });
-
-export const resendVerification = (email) =>
-  jsonReq("POST", "/auth/register/resend", { email });
 
 export const getMe = () => jsonReq("GET", "/auth/me");
 
@@ -226,12 +211,6 @@ export function myJobPostings() {
   return jsonReq("GET", "/recruiter/jobs/mine");
 }
 
-// Close a posting once a hire is made (or reopen it) — candidates can no
-// longer see or apply to a closed job; existing applications are unaffected.
-export function updateJobStatus(jobId, status) {
-  return jsonReq("PATCH", `/recruiter/jobs/${jobId}/status`, { status });
-}
-
 export function jobApplicants(jobId) {
   return jsonReq("GET", `/recruiter/jobs/${jobId}/applicants`);
 }
@@ -268,115 +247,4 @@ export function recruiterScreenZip(zipFile, jobText) {
 
 export function recruiterCandidateHistory(profileId) {
   return jsonReq("GET", `/recruiter/candidate/history/${profileId}`);
-}
-// ── Interview scheduling ───────────────────────────────────────
-export function scheduleInterview(applicationId, interviewDatetime) {
-  return jsonReq("PATCH", `/recruiter/applications/${applicationId}/schedule-interview`, {
-    interview_datetime: interviewDatetime,
-  });
-}
-
-// ── Profile picture ────────────────────────────────────────────
-export function uploadAvatar(file) {
-  const fd = new FormData();
-  fd.append("file", file);
-  return formReq("/profile/avatar", fd);
-}
-
-export async function deleteAvatar() {
-  const r = await fetch(`${API}/profile/avatar`, { method: "DELETE", headers: authHeaders() });
-  let d; try { d = await r.json(); } catch { d = {}; }
-  if (!r.ok) throw new Error(d?.detail || `Request failed (${r.status})`);
-  return d;
-}
-
-// ── Candidate documents ────────────────────────────────────────
-export function listDocuments() {
-  return jsonReq("GET", "/candidate/profile/documents");
-}
-
-export function uploadDocument(file) {
-  const fd = new FormData();
-  fd.append("file", file);
-  return formReq("/candidate/profile/documents", fd);
-}
-
-export async function deleteDocument(documentId) {
-  const r = await fetch(`${API}/candidate/profile/documents/${documentId}`, { method: "DELETE", headers: authHeaders() });
-  let d; try { d = await r.json(); } catch { d = {}; }
-  if (!r.ok) throw new Error(d?.detail || `Request failed (${r.status})`);
-  return d;
-}
-
-// Downloads need the auth header, which a plain <a href> can't send —
-// fetch as a blob and trigger the save via a temporary object URL instead.
-async function downloadViaBlob(url, fallbackName) {
-  const r = await fetch(url, { headers: authHeaders() });
-  if (!r.ok) throw new Error(`Download failed (${r.status})`);
-  const blob = await r.blob();
-  const disposition = r.headers.get("Content-Disposition") || "";
-  const match = disposition.match(/filename="?([^"]+)"?/);
-  const filename = match ? match[1] : fallbackName;
-  const objectUrl = URL.createObjectURL(blob);
-  const a = document.createElement("a");
-  a.href = objectUrl; a.download = filename;
-  document.body.appendChild(a); a.click(); a.remove();
-  URL.revokeObjectURL(objectUrl);
-}
-
-export function downloadOwnDocument(documentId, filename) {
-  return downloadViaBlob(`${API}/candidate/profile/documents/${documentId}/download`, filename);
-}
-
-export function recruiterDownloadDocument(applicationId, documentId, filename) {
-  return downloadViaBlob(`${API}/recruiter/applications/${applicationId}/documents/${documentId}/download`, filename);
-}
-
-// ── Recruiter view of a candidate's live profile (avatar + docs) ──
-export function recruiterCandidateProfile(applicationId) {
-  return jsonReq("GET", `/recruiter/applications/${applicationId}/candidate-profile`);
-}
-
-// ── Company profile (recruiter) ────────────────────────────────
-export function uploadCompanyPhoto(file) {
-  const fd = new FormData();
-  fd.append("file", file);
-  return formReq("/recruiter/profile/photos", fd);
-}
-
-export async function deleteCompanyPhoto(photoId) {
-  const r = await fetch(`${API}/recruiter/profile/photos/${photoId}`, { method: "DELETE", headers: authHeaders() });
-  let d; try { d = await r.json(); } catch { d = {}; }
-  if (!r.ok) throw new Error(d?.detail || `Request failed (${r.status})`);
-  return d;
-}
-
-// Public company page — what a candidate sees from a job listing.
-export function getCompanyProfile(recruiterId) {
-  return jsonReq("GET", `/companies/${recruiterId}`);
-}
-
-// ── Tailor for Job: jobsuit.ai-style accept/reject edit suggestions ──
-export function suggestTailoredEdits(resumeFile, jobText, missingSkills, missingKeywords) {
-  const fd = new FormData();
-  fd.append("resume_file", resumeFile);
-  fd.append("job_text", jobText);
-  fd.append("prefer_gemini", "true");
-  fd.append("missing_skills", (missingSkills || []).join(","));
-  fd.append("missing_keywords", (missingKeywords || []).join(","));
-  return formReq("/candidate/tailor-job/suggest-edits", fd);
-}
-
-export function saveTailoredVersion(resumeFile, acceptedEdits, label) {
-  const fd = new FormData();
-  fd.append("resume_file", resumeFile);
-  fd.append("prefer_gemini", "true");
-  fd.append("accepted_edits", JSON.stringify(acceptedEdits || []));
-  if (label) fd.append("label", label);
-  return formReq("/candidate/tailor-job/save-version", fd);
-}
-
-// ── Résumé version history — "go back to any version" ──
-export function restoreResumeVersion(versionId) {
-  return jsonReq("POST", `/candidate/resume-versions/${versionId}/restore`);
 }
